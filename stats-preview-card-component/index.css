@@ -1,9 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter&family=Lexend+Deca&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lexend+Deca&display=swap");
 
 :root {
   --primary-main: hsl(233, 47%, 7%);
   --primary-card: hsl(244, 38%, 16%);
   --primary-accent: hsl(277, 64%, 61%);
+  --overlay: hsla(277, 64%, 61%, 0.5);
 
   --neutral-main: hsl(0, 0%, 100%);
   --neutral-paragraph: hsla(0, 0%, 100%, 0.75);
@@ -12,13 +13,112 @@
   --font-size: 15px;
   --font-inter: "Inter", sans-serif;
   --font-lexend: "Lexend Deca", sans-serif;
-  --font-weight: 400;
+  --font-weight-reg: 400;
+  --font-weight-bold: 700;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: var(--font-inter);
   overflow-wrap: break-word;
+  letter-spacing: 2px;
+}
+
+body {
+  background-color: var(--primary-main);
+  color: pink;
+}
+
+main {
+  display: flex;
+  flex-flow: row wrap;
+
+  border-radius: 10px;
+  background-color: var(--primary-card);
+  margin: 10% auto 0% auto;
+  height: 90%;
+  width: 70%;
+  max-width: 1075px;
+}
+
+#card {
+  padding: 70px;
+  font-size: var(--font-size);
+}
+
+#body,
+.text {
+  color: var(--neutral-heading);
+  font-weight: var(--font-weight-reg);
+}
+
+#header,
+.num {
+  color: var(--neutral-main);
+  font-family: var(--font-lexend);
+  font-weight: var(--font-weight-bold);
+}
+
+#header {
+  font-size: 2em;
+  margin-bottom: 30px;
+}
+
+.highlight {
+  color: var(--primary-accent);
+}
+
+#body {
+  margin-bottom: 50px;
+}
+
+#info {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.num {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+
+.text {
+  text-transform: uppercase;
+  font-size: 0.8em;
+}
+
+#card,
+#img-container {
+  width: 50%;
+}
+
+#img-container {
+  overflow: hidden;
+  border-radius: 0 10px 10px 0;
+  position: relative;
+}
+
+#overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: var(--overlay);
+}
+
+#img {
+  height: 100%;
+}
+
+.attribution {
+  display: none;
+  font-size: 11px;
+  text-align: center;
+  position: relative;
+}
+
+.attribution a {
+  color: hsl(228, 45%, 44%);
 }

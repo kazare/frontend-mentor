@@ -110,6 +110,7 @@ main {
 
 #img {
   height: 100%;
+  display: block;
 }
 
 .attribution {
@@ -121,4 +122,45 @@ main {
 
 .attribution a {
   color: hsl(228, 45%, 44%);
+}
+
+@media screen and (max-width: 1024px) {
+  main {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    flex-flow: column nowrap;
+    height: initial;
+    width: 90%;
+  }
+
+  #card,
+  #img-container {
+    width: 100%;
+  }
+
+  #card {
+    padding: 30px;
+    text-align: center;
+  }
+
+  #info {
+    flex-flow: column wrap;
+  }
+
+  .block {
+    margin-bottom: 30px;
+  }
+
+  #img-container {
+    order: -1;
+    border-radius: 10px 10px 0px 0px;
+  }
+
+  #img {
+    width: 100%;
+  }
 }

@@ -28,7 +28,7 @@
 
 body {
   background-color: var(--primary-main);
-  color: pink;
+  color: var(--primary-accent);
 }
 
 main {
@@ -114,14 +114,15 @@ main {
 }
 
 .attribution {
-  display: none;
   font-size: 11px;
   text-align: center;
   position: relative;
+  margin-bottom: 20px;
+  color: var(--primary-accent);
 }
 
 .attribution a {
-  color: hsl(228, 45%, 44%);
+  color: var(--primary-accent);
 }
 
 @media screen and (max-width: 1024px) {

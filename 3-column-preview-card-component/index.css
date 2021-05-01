@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&family=Lexend+Deca&display=swap");
+
+:root {
+  --primary-orange: hsl(31, 77%, 52%);
+  --primary-dark-cyan: hsl(184, 100%, 22%);
+  --primary-vd-cyan: hsl(179, 100%, 13%);
+
+  --neutral-white: hsla(0, 0%, 100%, 0.75);
+  --neutral-gray: hsl(0, 0%, 95%);
+  --font-size: 15px;
+
+  --font-bd: "Big Shoulders Display", cursive;
+  --font-lexend: "Lexend Deca", sans-serif;
+  --font-weight-reg: 400;
+  --font-weight-bold: 700;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+}
+
+body {
+  font-family: var(--font-lexend);
+  font-size: var(--font-size);
+}
+
+#card-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.card {
+  color: var(--neutral-white);
+  width: 20%;
+  padding: 50px;
+}
+
+#card1 {
+  background-color: var(--primary-orange);
+  border-radius: 5px 0 0 5px;
+}
+
+#card2 {
+  background-color: var(--primary-dark-cyan);
+}
+
+#card3 {
+  background-color: var(--primary-vd-cyan);
+  border-radius: 0 5px 5px 0;
+}
+
+.icon {
+  margin-bottom: 30px;
+}
+
+.title {
+  font-family: var(--font-bd);
+  text-transform: uppercase;
+  color: var(--neutral-gray);
+}
+
+.description {
+  line-height: 1.5;
+  margin: 20px auto 90px;
+}
+
+#card1 .button {
+  color: var(--primary-orange);
+}
+
+#card2 .button {
+  color: var(--primary-dark-cyan);
+}
+
+#card3 .button {
+  color: var(--primary-vd-cyan);
+}
+
+.button {
+  width: 70%;
+  background-color: var(--neutral-gray);
+  border: 2px solid var(--neutral-gray);
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-family: var(--font-lexend);
+  font-weight: var(--font-weight-bold);
+}
+
+.button:hover {
+  background-color: transparent;
+  color: var(--neutral-gray) !important;
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+.attribution a {
+  color: var(--primary-orange);
+  text-decoration: underline dashed;
+}
+
+.attribution a:hover {
+  color: var(--primary-vd-cyan);
+  text-decoration: underline solid;
+}

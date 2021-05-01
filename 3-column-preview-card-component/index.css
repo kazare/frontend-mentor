@@ -110,3 +110,29 @@ body {
   color: var(--primary-vd-cyan);
   text-decoration: underline solid;
 }
+
+@media screen and (max-width: 1024px) {
+  .card {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #card-container {
+    flex-flow: column nowrap;
+    height: initial;
+    margin: 80px auto;
+  }
+
+  .card {
+    width: 90%;
+  }
+
+  .description {
+    margin-bottom: 30px;
+  }
+
+  .attribution {
+    margin-bottom: 10px;
+  }
+}

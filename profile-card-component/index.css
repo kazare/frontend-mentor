@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap");
+
+:root {
+  --primary-cyan: hsl(185, 75%, 39%);
+  --primary-vd-blue: hsl(229, 23%, 23%);
+  --primary-dark-blue: hsl(227, 10%, 46%);
+
+  --neutral-dark-gray: hsl(0, 0%, 59%);
+
+  --font-size-main: 18px;
+  --font-family: "Kumbh Sans", sans-serif;
+  --font-reg: 400;
+  --font-bold: 700;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+  overflow-wrap: break-word;
+}
+
+body {
+  background-color: var(--primary-cyan);
+  color: var(--primary-dark-blue);
+  font-weight: var(--font-reg);
+  overflow: hidden;
+}
+
+#container {
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.img-bg {
+  position: absolute;
+  z-index: -1;
+}
+
+#img-top {
+  top: -60%;
+  right: 60%;
+}
+
+#img-bottom {
+  bottom: -80%;
+  left: 50%;
+}
+
+#card {
+  background-color: white;
+  border-radius: 20px;
+}
+
+#card img {
+  display: block;
+}
+
+#card-bg {
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+}
+
+#pic {
+  border-radius: 100%;
+  border: 5px solid white;
+  background-color: white;
+  position: relative;
+  margin: -50px auto auto;
+}
+
+.bold {
+  font-size: var(--font-size-main);
+  font-weight: var(--font-bold);
+  color: var(--primary-vd-blue);
+}
+
+#info {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  text-align: center;
+  padding: 30px 0;
+}
+
+#name {
+  margin-right: 10px;
+}
+
+#info p:first-child {
+  margin-bottom: 10px;
+}
+
+#stats {
+  border-top: 0.5px solid var(--neutral-dark-gray);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  padding: 30px;
+  text-align: center;
+}
+
+.stat {
+  margin-bottom: 10px;
+}
+
+.label {
+  font-size: 0.7em;
+  letter-spacing: 2px;
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+  color: var(--primary-vd-blue);
+}
+
+.attribution a {
+  text-decoration: underline dashed;
+}
+
+.attribution a:hover {
+  color: white;
+  text-decoration: underline solid;
+}

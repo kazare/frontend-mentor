@@ -1,0 +1,150 @@
+body {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+header {
+  background-color: var(--elements);
+  box-shadow: var(--element-shadow);
+  padding: 20px 100px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header > div {
+  font-weight: 600;
+}
+
+main {
+  padding: 50px 100px;
+}
+
+.filters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.search {
+  padding: 10px 20px;
+  border: none;
+  box-shadow: var(--element-shadow);
+  background-color: var(--elements);
+}
+
+.search::placeholder {
+  color: var(--text);
+}
+
+.custom-select {
+  background-color: var(--elements);
+  padding: 10px 20px;
+  cursor: pointer;
+  position: relative;
+  width: 200px;
+}
+
+.custom-select,
+.custom-options {
+  border-radius: 5px;
+  box-shadow: var(--element-shadow);
+}
+
+.custom-select_trigger {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+}
+
+.custom-options {
+  position: absolute;
+  display: block;
+  background-color: var(--elements);
+  opacity: 1;
+  visibility: hidden;
+  top: 50px;
+  left: 0;
+  width: 100%;
+}
+
+.custom-options.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.custom-option {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  padding: 10px 20px;
+  width: 100%;
+}
+
+.custom-option:first-of-type {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.custom-option:last-of-type {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.custom-option:hover {
+  background-color: var(--text);
+  color: var(--elements);
+}
+
+.custom-option.selected {
+  background-color: var(--text);
+  color: var(--elements);
+}
+
+.countryWrapping {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 5em;
+  font-size: var(--items);
+}
+
+.country {
+  box-shadow: var(--box-shadow);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: var(--elements);
+}
+
+.flag {
+  object-fit: cover;
+  width: 100%;
+  height: 185px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.info {
+  padding: 20px;
+}
+
+.name {
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.info > div {
+  margin-bottom: 5px;
+}
+
+.label {
+  font-weight: 800;
+}

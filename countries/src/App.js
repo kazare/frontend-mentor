@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import './App.css';
+import Filters from './Filters';
+import Nav from './Nav';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -8,6 +11,9 @@ function App() {
   const [results, setResults] = useState([]);
   const [resultsReady, setResultsReady] = useState(false);
   const [region, setRegion] = useState('');
+  const [countryCode, setCountryCode] = useState('USA');
+  const [country, setCountry] = useState({});
+  const [countryReady, setCountryReady] = useState(false);
 
   const getCountriesAll = async () => {
     await fetch('https://restcountries.eu/rest/v2/all', {
@@ -19,7 +25,7 @@ function App() {
       });
   };
 
-  const getCountry = async () => {
+  const getResults = async () => {
     await fetch(`https://restcountries.eu/rest/v2/name/${query}`, {
       method: 'GET'
     })
@@ -50,8 +56,24 @@ function App() {
       });
   };
 
+  const getCountry = async (code) => {
+    setCountryCode(code);
+
+    await fetch(`https://restcountries.eu/rest/v2/alpha/${code}`, {
+      method: 'GET'
+    })
+      .then(data => data.json())
+      .then((results) => {
+        setCountry(results);
+        setCountryReady(true);
+        console.log(results);
+      });
+
+  }
+
   useEffect(() => {
     getCountriesAll();
+    getCountry(countryCode);
   }, []);
 
   useEffect(() => {
@@ -59,7 +81,7 @@ function App() {
       setResultsReady(false);
       return null;
     }
-    getCountry();
+    getResults();
     setQuery('');
     setResultsReady(false);
   }, [query]);
@@ -91,50 +113,9 @@ function App() {
     }
   };
 
-  const updateSearch = ({ target }) => {
-    setSearch(target.value);
+  const updateSearch = (e) => {
+    setSearch(e.target.value);
   };
-
-  const Countries = () => {
-    return (
-      <div className="countryWrapping">
-        {countries.map((country, index) => {
-          return (
-            <div className="country" key={index}>
-              <img className="flag" src={country.flag} alt={`Flag of ${country.name}`} />
-              <div className="info">
-                <h2 className="name">{country.name}</h2>
-                <div><span className="label">Population: </span> {numWithCommas(country.population)}</div>
-                <div><span className="label">Region: </span>{country.region}</div>
-                <div><span className="label">Capital: </span>{country.capital}</div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
-
-  const Results = () => {
-    return (
-      <div className="countryWrapping">
-        {results.map((country, index) => {
-          return (
-            <div className="country" key={index}>
-              <img className="flag" src={country.flag} alt={`Flag of ${country.name}`} />
-              <div className="info">
-                <h2 className="name">{country.name}</h2>
-                <div><span className="label">Population: </span> {numWithCommas(country.population)}</div>
-                <div><span className="label">Region: </span>{country.region}</div>
-                <div><span className="label">Capital: </span>{country.capital}</div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
-
 
   const handleSelect = () => {
     document.getElementsByClassName('custom-options')[0].classList.toggle('open');
@@ -154,41 +135,132 @@ function App() {
   };
 
 
+  const Home = () => {
+    return (
+      <div>
+        { resultsReady ? <Results /> : <Countries />}
+      </div>
+    );
+  };
 
-  return (
-    <div className="App">
-      <header>
-        <h1>Where in the world?</h1>
-        <div>Dark Mode</div>
-      </header>
-      <main>
-        <div className="filters">
-          <input className="search" type="text" value={search} onChange={updateSearch} onKeyDown={handleKeyDown} placeholder="Search for a country..." />
+  const Countries = () => {
+    return (
+      <div className="countryWrapping">
 
-          <div class="custom-select-wrapper">
-            <div class="custom-select" onClick={handleSelect}>
-              <div class="custom-select__trigger"><span>Filter By Region </span>
-                <div class="arrow"></div>
+        {countries.map((country, index) => {
+          return (
+            <Link to="/details">
+              <div className="country" key={index} data-code={country.alpha3Code} onClick={() => getCountry(country.alpha3Code)}>
+                <img className="flag" src={country.flag} alt={`Flag of ${country.name}`} />
+                <div className="info">
+                  <h2 className="name">{country.name}</h2>
+                  <div><span className="label">Population: </span> {numWithCommas(country.population)}</div>
+                  <div><span className="label">Region: </span>{country.region}</div>
+                  <div><span className="label">Capital: </span>{country.capital}</div>
+                </div>
               </div>
+            </Link>
+          );
+        })}
 
-              <div class="custom-options">
-                <span class="custom-option" data-value="All">Filter By Region</span>
-                <span class="custom-option selected" data-value="All">All</span>
-                <span class="custom-option" data-value="Africa">Africa</span>
-                <span class="custom-option" data-value="Americas">Americas</span>
-                <span class="custom-option" data-value="Asia">Asia</span>
-                <span class="custom-option" data-value="Europe">Europe</span>
-                <span class="custom-option" data-value="Oceania">Oceania</span>
+      </div>
+    );
+  };
+
+  const Results = () => {
+    return (
+      <div className="countryWrapping">
+        {results.map((country, index) => {
+          return (
+            <Link to="/details">
+              <div className="country" key={index} data-code={country.alpha3Code} onClick={() => getCountry(country.alpha3Code)}>
+                <img className="flag" src={country.flag} alt={`Flag of ${country.name}`} />
+                <div className="info">
+                  <h2 className="name">{country.name}</h2>
+                  <div><span className="label">Population: </span> {numWithCommas(country.population)}</div>
+                  <div><span className="label">Region: </span>{country.region}</div>
+                  <div><span className="label">Capital: </span>{country.capital}</div>
+                </div>
               </div>
+            </Link>
+          );
+        })}
+      </div>
+    );
+  };
+
+  const Country = () => {
+    let langauges = [];
+    let currencies = [];
+
+    country.languages.forEach((lang) => {
+      langauges.push(lang.name);
+    })
+
+    country.currencies.forEach((money) => {
+      currencies.push(money.name);
+    })
+
+    return (
+      <div className="details-wrapper">
+        <Link to="/"><button className="back-button">Back</button></Link>
+
+        <div className="country-details">
+          <div className="flag-container"><img className="flag" src={country.flag} alt={`Flag of ${country.name}`} /></div>
+
+          <div className='details'>
+            <h2>{country.name}</h2>
+            <ul className="details-info">
+              <li><span className="label">Native Name: </span>{country.nativeName}</li>
+              <li><span className="label">Population: </span>{numWithCommas(country.population)}</li>
+              <li><span className="label">Region: </span>{country.region}</li>
+              <li><span className="label">Sub Region: </span>{country.subregion}</li>
+              <li><span className="label">Capital: </span>{country.capital}</li>
+              <li><span className="label">Top Level Domain: </span>{country.topLevelDomain}</li>
+              <li><span className="label">Currencies: </span>{currencies.join(", ")}</li>
+              <li><span className="label">Languages: </span>{langauges.join(", ")}</li>
+            </ul>
+
+            <div className="border-wrapper">
+              <span className="label">Border Countries: </span>
+              <div className="borders"></div>
+              {country.borders.map((border, index) => {
+                return <div className="border" value={index}>{border}</div>;
+              })}
             </div>
           </div>
         </div>
+      </div>
+    );
+  };
 
+  const Error = () => {
+    return <h1>Oops! Page not found!</h1>;
+  };
 
-        {resultsReady ? <Results /> : <Countries />}
+  return (
+    <Router>
+      <div className="App">
+        <Nav />
 
-      </main>
-    </div>
+        <main>
+          <Switch>
+            <Route path='/details' component={Country} />
+            <Route path='/' exact>
+              <Filters
+                search={search}
+                updateSearch={updateSearch}
+                handleKeyDown={handleKeyDown}
+                handleSelect={handleSelect}
+              />
+              <Home />
+            </Route>
+
+            <Route component={Error} />
+          </Switch>
+        </main>
+      </div>
+    </Router>
   );
 }
 

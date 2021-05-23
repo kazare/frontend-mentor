@@ -8,6 +8,7 @@
 
   --box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.08);
   --element-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.08);
+  --btn-hover: 0px 0px 10px 5px var(--text);
 
   /* text */
   --items: 14px;

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import './App.css';
-import Filters from './Filters';
+import Error from './Error';
 import Nav from './Nav';
+import Filters from './Filters';
+import Country from './Country';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -14,6 +16,8 @@ function App() {
   const [countryCode, setCountryCode] = useState('USA');
   const [country, setCountry] = useState({});
   const [countryReady, setCountryReady] = useState(false);
+  const [names, setNames] = useState({});
+  const [namesReady, setNamesReady] = useState(false);
 
   const getCountriesAll = async () => {
     await fetch('https://restcountries.eu/rest/v2/all', {
@@ -66,14 +70,26 @@ function App() {
       .then((results) => {
         setCountry(results);
         setCountryReady(true);
-        console.log(results);
       });
+  };
 
-  }
+  const getNames = async () => {
+    await fetch(`https://restcountries.eu/rest/v2/all?fields=alpha3Code;name;alt`, {
+      method: 'GET'
+    })
+      .then(data => data.json())
+      .then((results) => {
+        setNames(results);
+        setNamesReady(true);
+      });
+  };
 
   useEffect(() => {
     getCountriesAll();
+
     getCountry(countryCode);
+    getNames();
+
   }, []);
 
   useEffect(() => {
@@ -107,34 +123,6 @@ function App() {
     return num.toLocaleString();
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      setQuery(search);
-    }
-  };
-
-  const updateSearch = (e) => {
-    setSearch(e.target.value);
-  };
-
-  const handleSelect = () => {
-    document.getElementsByClassName('custom-options')[0].classList.toggle('open');
-
-    const options = document.querySelectorAll('.custom-option');
-
-    for (const option of options) {
-      option.addEventListener('click', function () {
-        if (!this.classList.contains('selected')) {
-          this.parentNode.querySelector('.custom-option.selected').classList.remove('selected');
-          this.classList.add('selected');
-          setRegion(this.dataset.value);
-          this.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = this.textContent;
-        }
-      })
-    }
-  };
-
-
   const Home = () => {
     return (
       <div>
@@ -150,7 +138,7 @@ function App() {
         {countries.map((country, index) => {
           return (
             <Link to="/details">
-              <div className="country" key={index} data-code={country.alpha3Code} onClick={() => getCountry(country.alpha3Code)}>
+              <div className="country btn" key={index} data-code={country.alpha3Code} onClick={() => getCountry(country.alpha3Code)}>
                 <img className="flag" src={country.flag} alt={`Flag of ${country.name}`} />
                 <div className="info">
                   <h2 className="name">{country.name}</h2>
@@ -173,7 +161,7 @@ function App() {
         {results.map((country, index) => {
           return (
             <Link to="/details">
-              <div className="country" key={index} data-code={country.alpha3Code} onClick={() => getCountry(country.alpha3Code)}>
+              <div className="country btn" key={index} data-code={country.alpha3Code} onClick={() => getCountry(country.alpha3Code)}>
                 <img className="flag" src={country.flag} alt={`Flag of ${country.name}`} />
                 <div className="info">
                   <h2 className="name">{country.name}</h2>
@@ -189,55 +177,6 @@ function App() {
     );
   };
 
-  const Country = () => {
-    let langauges = [];
-    let currencies = [];
-
-    country.languages.forEach((lang) => {
-      langauges.push(lang.name);
-    })
-
-    country.currencies.forEach((money) => {
-      currencies.push(money.name);
-    })
-
-    return (
-      <div className="details-wrapper">
-        <Link to="/"><button className="back-button">Back</button></Link>
-
-        <div className="country-details">
-          <div className="flag-container"><img className="flag" src={country.flag} alt={`Flag of ${country.name}`} /></div>
-
-          <div className='details'>
-            <h2>{country.name}</h2>
-            <ul className="details-info">
-              <li><span className="label">Native Name: </span>{country.nativeName}</li>
-              <li><span className="label">Population: </span>{numWithCommas(country.population)}</li>
-              <li><span className="label">Region: </span>{country.region}</li>
-              <li><span className="label">Sub Region: </span>{country.subregion}</li>
-              <li><span className="label">Capital: </span>{country.capital}</li>
-              <li><span className="label">Top Level Domain: </span>{country.topLevelDomain}</li>
-              <li><span className="label">Currencies: </span>{currencies.join(", ")}</li>
-              <li><span className="label">Languages: </span>{langauges.join(", ")}</li>
-            </ul>
-
-            <div className="border-wrapper">
-              <span className="label">Border Countries: </span>
-              <div className="borders"></div>
-              {country.borders.map((border, index) => {
-                return <div className="border" value={index}>{border}</div>;
-              })}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const Error = () => {
-    return <h1>Oops! Page not found!</h1>;
-  };
-
   return (
     <Router>
       <div className="App">
@@ -245,13 +184,24 @@ function App() {
 
         <main>
           <Switch>
-            <Route path='/details' component={Country} />
+            <Route path='/details'>
+              {countryReady && namesReady ?
+                <Country
+
+                  names={names}
+                  country={country}
+                  numWithCommas={numWithCommas}
+                  getCountry={getCountry}
+
+                /> : <Error />}
+            </Route>
+
             <Route path='/' exact>
               <Filters
+                setQuery={setQuery}
                 search={search}
-                updateSearch={updateSearch}
-                handleKeyDown={handleKeyDown}
-                handleSelect={handleSelect}
+                setSearch={setSearch}
+                setRegion={setRegion}
               />
               <Home />
             </Route>

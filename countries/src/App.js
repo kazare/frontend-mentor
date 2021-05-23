@@ -145,7 +145,9 @@ function App() {
                   <div><span className="label">Population: </span> {numWithCommas(country.population)}</div>
                   <div><span className="label">Region: </span>{country.region}</div>
                   <div><span className="label">Capital: </span>{country.capital}</div>
+                  <div className='view-button btn'>View <i class="fas fa-search-plus"></i></div>
                 </div>
+
               </div>
             </Link>
           );

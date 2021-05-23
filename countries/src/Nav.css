@@ -13,3 +13,20 @@ header {
 header > div {
   font-weight: 600;
 }
+
+.theme-toggle {
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 20px 10px;
+    font-size: 12px;
+  }
+
+  .theme-label {
+    display: none;
+  }
+}

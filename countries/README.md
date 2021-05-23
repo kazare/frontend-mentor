@@ -27,7 +27,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: https://www.frontendmentor.io/solutions/rest-countries-api-with-color-theme-switcher-c1W5Gz-go](https://www.frontendmentor.io/solutions/rest-countries-api-with-color-theme-switcher-c1W5Gz-go)
+- Solution URL: [https://www.frontendmentor.io/solutions/rest-countries-api-with-color-theme-switcher-c1W5Gz-go](https://www.frontendmentor.io/solutions/rest-countries-api-with-color-theme-switcher-c1W5Gz-go)
 - Live Site URL: [https://countries-kj.netlify.app/](https://countries-kj.netlify.app/)
 
 ## My process

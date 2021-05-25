@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { Toggle, RockButton, PaperButton, ScissorsButton } from './Buttons';
 import './App.css';
 import './GameStart.css';
 import './Buttons.css';
 
 
-const Original = () => {
+const Original = ({ easyMode, setEasyMode }) => {
    const [userChoice, setUserChoice] = useState('');
    const [computerChoice, setComputerChoice] = useState('');
    const [score, setScore] = useState(0);
@@ -111,36 +112,6 @@ const Original = () => {
       );
    };
 
-   const RockButton = () => {
-      return (
-         <div className="game-button rock">
-            <div className="icon-bg">
-               <img src="/images/icon-rock.svg" alt="rock" />
-            </div>
-         </div>
-      );
-   };
-
-   const PaperButton = () => {
-      return (
-         <div className="game-button paper">
-            <div className="icon-bg">
-               <img src="/images/icon-paper.svg" alt="paper" />
-            </div>
-         </div>
-      );
-   };
-
-   const ScissorsButton = () => {
-      return (
-         <div className="game-button scissors">
-            <div className="icon-bg">
-               <img src="/images/icon-scissors.svg" alt="scissors" />
-            </div>
-         </div>
-      );
-   };
-
    const Placeholder = () => {
       return (
          <div className='placeholder'></div>
@@ -171,38 +142,61 @@ const Original = () => {
       }
 
       return (
-         <div className='game-start'>
-            <div className={`user players ${userHalo}`}>
-               <h2 className="title">YOU PICKED</h2>
-               {userChoice === "rock" ? <RockButton /> : null}
-               {userChoice === "paper" ? <PaperButton /> : null}
-               {userChoice === "scissors" ? <ScissorsButton /> : null}
-               {userChoice === "" ? <Placeholder /> : null}
-            </div>
-            {scoringReady ? <Results /> : null}
-            <div className={`computer players ${computerHalo}`}>
-               <h2 className="title">THE HOUSE PICKED</h2>
-               {computerChoice === "rock" ? <RockButton /> : null}
-               {computerChoice === "paper" ? <PaperButton /> : null}
-               {computerChoice === "scissors" ? <ScissorsButton /> : null}
-               {computerChoice === "" ? <Placeholder /> : null}
+         <div>
+            <div className='game-start desktop'>
+               <div className={`user players ${userHalo}`}>
+                  <h2 className="title">YOU PICKED</h2>
+                  {userChoice === "rock" ? <RockButton /> : null}
+                  {userChoice === "paper" ? <PaperButton /> : null}
+                  {userChoice === "scissors" ? <ScissorsButton /> : null}
+                  {userChoice === "" ? <Placeholder /> : null}
+               </div>
+               {scoringReady ? <Results /> : null}
+               <div className={`computer players ${computerHalo}`}>
+                  <h2 className="title">THE HOUSE PICKED</h2>
+                  {computerChoice === "rock" ? <RockButton /> : null}
+                  {computerChoice === "paper" ? <PaperButton /> : null}
+                  {computerChoice === "scissors" ? <ScissorsButton /> : null}
+                  {computerChoice === "" ? <Placeholder /> : null}
+               </div>
             </div>
 
+            <div className='game-start mobile'>
+               <div className="player-container">
+                  <div className={`user players ${userHalo}`}>
+                     {userChoice === "rock" ? <RockButton /> : null}
+                     {userChoice === "paper" ? <PaperButton /> : null}
+                     {userChoice === "scissors" ? <ScissorsButton /> : null}
+                     {userChoice === "" ? <Placeholder /> : null}
+                     <h2 className="title">YOU PICKED</h2>
+                  </div>
+                  <div className={`computer players ${computerHalo}`}>
+                     {computerChoice === "rock" ? <RockButton /> : null}
+                     {computerChoice === "paper" ? <PaperButton /> : null}
+                     {computerChoice === "scissors" ? <ScissorsButton /> : null}
+                     {computerChoice === "" ? <Placeholder /> : null}
+                     <h2 className="title">THE HOUSE PICKED</h2>
+                  </div>
+               </div>
+               {scoringReady ? <Results /> : null}
+            </div>
          </div>
       );
    };
-
 
    return (
       <div className='original'>
          {showRules ? <Rules /> : null}
          <div className="container">
             <header>
-               <img className="logo" src="/images/logo.svg" alt="Rock, Paper, Scissors" />
-               <div className="score-container">
-                  <div className="label">SCORE</div>
-                  <div className="score">{score}</div>
+               <div className="header">
+                  <img className="logo" src="/images/logo.svg" alt="Rock, Paper, Scissors" />
+                  <div className="score-container">
+                     <div className="label">SCORE</div>
+                     <div className="score">{score}</div>
+                  </div>
                </div>
+               <Toggle easyMode={easyMode} setEasyMode={setEasyMode} />
             </header>
 
             <main>

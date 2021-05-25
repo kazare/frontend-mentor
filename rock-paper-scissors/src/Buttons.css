@@ -1,3 +1,100 @@
+.toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto auto;
+}
+
+.toggle-icon {
+  font-size: 1.5em;
+}
+
+.switch,
+.toggle-icon {
+  cursor: pointer;
+}
+
+.switch {
+  width: 100px;
+  height: 30px;
+  border-radius: 15px;
+  position: relative;
+  border: 3px solid var(--header-outline);
+  margin: 0 20px;
+}
+
+.switch-button {
+  width: 30px;
+  height: 30px;
+  background-color: #ffffff;
+  border-radius: 100%;
+  box-shadow: 0px 0px 0px 10px var(--header-outline);
+}
+
+.toggle.easy .switch {
+  background-color: hsl(214, 47%, 23%);
+  animation-name: advancedToEasyColor;
+  animation-duration: 0.5s;
+}
+
+.toggle.easy .switch-button {
+  margin-left: 0px;
+  animation-name: advancedToEasyBtn;
+  animation-duration: 0.5s;
+}
+
+.toggle.advanced .switch {
+  background-color: hsl(237, 49%, 15%);
+  animation-name: easyToAdvancedColor;
+  animation-duration: 0.5s;
+}
+
+.toggle.advanced .switch-button {
+  margin-left: 70px;
+  animation-name: easyToAdvancedBtn;
+  animation-duration: 0.5s;
+}
+
+@keyframes easyToAdvancedColor {
+  from {
+    background-color: hsl(214, 47%, 23%);
+  }
+
+  to {
+    background-color: hsl(237, 49%, 15%);
+  }
+}
+
+@keyframes advancedToEasyBtn {
+  from {
+    margin-left: 70px;
+  }
+
+  to {
+    margin-left: 0px;
+  }
+}
+
+@keyframes advancedToEasyColor {
+  from {
+    background-color: hsl(237, 49%, 15%);
+  }
+
+  to {
+    background-color: hsl(214, 47%, 23%);
+  }
+}
+
+@keyframes easyToAdvancedBtn {
+  from {
+    margin-left: 0px;
+  }
+
+  to {
+    margin-left: 70px;
+  }
+}
+
 .game-buttons-wrapper {
   width: 400px;
   height: 400px;
@@ -129,4 +226,60 @@
 .choose .spock {
   top: 140px;
   left: 0px;
+}
+
+@media screen and (max-width: 426px) {
+  .game-buttons-wrapper,
+  .game-buttons-wrapper.advanced {
+    width: 300px;
+    height: 300px;
+    margin-bottom: 50px;
+  }
+
+  .game-bg {
+    transform: scale(0.8);
+  }
+  .choose .game-button {
+    transform: scale(0.7);
+  }
+
+  .choose .rock {
+    left: 25%;
+    bottom: 0px;
+  }
+
+  .choose .paper {
+    top: -30px;
+    left: -20px;
+  }
+
+  .choose .scissors {
+    top: -30px;
+    right: -20px;
+  }
+
+  .choose .scissors.advanced {
+    top: -20px;
+    left: 90px;
+  }
+
+  .choose .paper.advanced {
+    top: 70px;
+    right: -20px;
+  }
+
+  .choose .rock.advanced {
+    bottom: -30px;
+    right: 20px;
+  }
+
+  .choose .lizard.advanced {
+    bottom: -30px;
+    left: 20px;
+  }
+
+  .choose .spock.advanced {
+    top: 70px;
+    left: -20px;
+  }
 }

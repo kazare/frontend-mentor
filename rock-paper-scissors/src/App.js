@@ -5,17 +5,12 @@ import './App.css';
 import './GameStart.css';
 import './Buttons.css';
 
-
-
 const App = () => {
   const [easyMode, setEasyMode] = useState(true);
 
-
   return (
     <div className="App">
-      <button onClick={() => { setEasyMode(true) }}>Easy</button> <button onClick={() => { setEasyMode(false) }}>Advanced</button>
-
-      {easyMode ? <Original /> : <Advanced />}
+      {easyMode ? <Original easyMode={easyMode} setEasyMode={setEasyMode} /> : <Advanced easyMode={easyMode} setEasyMode={setEasyMode} />}
     </div>
   );
 }

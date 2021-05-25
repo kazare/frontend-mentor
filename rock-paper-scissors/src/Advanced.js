@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import './Advanced.css';
+import { Toggle, RockButton, PaperButton, ScissorsButton, LizardButton, SpockButton } from './Buttons';
 
-const Advanced = () => {
+const Advanced = ({ easyMode, setEasyMode }) => {
    const [userChoice, setUserChoice] = useState('');
    const [computerChoice, setComputerChoice] = useState('');
    const [score, setScore] = useState(0);
@@ -114,56 +114,6 @@ const Advanced = () => {
       );
    };
 
-   const RockButton = () => {
-      return (
-         <div className="game-button rock">
-            <div className="icon-bg">
-               <img src="/images/icon-rock.svg" alt="rock" />
-            </div>
-         </div>
-      );
-   };
-
-   const PaperButton = () => {
-      return (
-         <div className="game-button paper">
-            <div className="icon-bg">
-               <img src="/images/icon-paper.svg" alt="paper" />
-            </div>
-         </div>
-      );
-   };
-
-   const ScissorsButton = () => {
-      return (
-         <div className="game-button scissors">
-            <div className="icon-bg">
-               <img src="/images/icon-scissors.svg" alt="scissors" />
-            </div>
-         </div>
-      );
-   };
-
-   const LizardButton = () => {
-      return (
-         <div className="game-button lizard">
-            <div className="icon-bg">
-               <img src="/images/icon-lizard.svg" alt="lizard" />
-            </div>
-         </div>
-      );
-   };
-
-   const SpockButton = () => {
-      return (
-         <div className="game-button spock">
-            <div className="icon-bg">
-               <img src="/images/icon-spock.svg" alt="spock" />
-            </div>
-         </div>
-      );
-   };
-
    const Placeholder = () => {
       return (
          <div className='placeholder'></div>
@@ -194,25 +144,52 @@ const Advanced = () => {
       }
 
       return (
-         <div className='game-start'>
-            <div className={`user players ${userHalo}`}>
-               <h2 className="title">YOU PICKED</h2>
-               {userChoice === "rock" ? <RockButton /> : null}
-               {userChoice === "paper" ? <PaperButton /> : null}
-               {userChoice === "scissors" ? <ScissorsButton /> : null}
-               {userChoice === "lizard" ? <LizardButton /> : null}
-               {userChoice === "spock" ? <SpockButton /> : null}
-               {userChoice === "" ? <Placeholder /> : null}
+         <div>
+            <div className='game-start desktop'>
+               <div className={`user players ${userHalo}`}>
+                  <h2 className="title">YOU PICKED</h2>
+                  {userChoice === "rock" ? <RockButton /> : null}
+                  {userChoice === "paper" ? <PaperButton /> : null}
+                  {userChoice === "scissors" ? <ScissorsButton /> : null}
+                  {userChoice === "lizard" ? <LizardButton /> : null}
+                  {userChoice === "spock" ? <SpockButton /> : null}
+                  {userChoice === "" ? <Placeholder /> : null}
+               </div>
+               {scoringReady ? <Results /> : null}
+               <div className={`computer players ${computerHalo}`}>
+                  <h2 className="title">THE HOUSE PICKED</h2>
+                  {computerChoice === "rock" ? <RockButton /> : null}
+                  {computerChoice === "paper" ? <PaperButton /> : null}
+                  {computerChoice === "scissors" ? <ScissorsButton /> : null}
+                  {computerChoice === "lizard" ? <LizardButton /> : null}
+                  {computerChoice === "spock" ? <SpockButton /> : null}
+                  {computerChoice === "" ? <Placeholder /> : null}
+               </div>
             </div>
-            {scoringReady ? <Results /> : null}
-            <div className={`computer players ${computerHalo}`}>
-               <h2 className="title">THE HOUSE PICKED</h2>
-               {computerChoice === "rock" ? <RockButton /> : null}
-               {computerChoice === "paper" ? <PaperButton /> : null}
-               {computerChoice === "scissors" ? <ScissorsButton /> : null}
-               {computerChoice === "lizard" ? <LizardButton /> : null}
-               {computerChoice === "spock" ? <SpockButton /> : null}
-               {computerChoice === "" ? <Placeholder /> : null}
+
+            <div className='game-start mobile'>
+               <div className='player-container'>
+                  <div className={`user players ${userHalo}`}>
+                     {userChoice === "rock" ? <RockButton /> : null}
+                     {userChoice === "paper" ? <PaperButton /> : null}
+                     {userChoice === "scissors" ? <ScissorsButton /> : null}
+                     {userChoice === "lizard" ? <LizardButton /> : null}
+                     {userChoice === "spock" ? <SpockButton /> : null}
+                     {userChoice === "" ? <Placeholder /> : null}
+                     <h2 className="title">YOU PICKED</h2>
+                  </div>
+
+                  <div className={`computer players ${computerHalo}`}>
+                     {computerChoice === "rock" ? <RockButton /> : null}
+                     {computerChoice === "paper" ? <PaperButton /> : null}
+                     {computerChoice === "scissors" ? <ScissorsButton /> : null}
+                     {computerChoice === "lizard" ? <LizardButton /> : null}
+                     {computerChoice === "spock" ? <SpockButton /> : null}
+                     {computerChoice === "" ? <Placeholder /> : null}
+                     <h2 className="title">THE HOUSE PICKED</h2>
+                  </div>
+               </div>
+               {scoringReady ? <Results /> : null}
             </div>
 
          </div>
@@ -225,11 +202,15 @@ const Advanced = () => {
 
          <div className="container">
             <header>
-               <img className="logo" src="/images/logo-bonus.svg" alt="Rock, Paper, Scissors" />
-               <div className="score-container">
-                  <div className="label">SCORE</div>
-                  <div className="score">{score}</div>
+               <div className="header">
+                  <img className="logo" src="/images/logo-bonus.svg" alt="Rock, Paper, Scissors, Lizard, Spock" />
+                  <div className="score-container">
+                     <div className="label">SCORE</div>
+                     <div className="score">{score}</div>
+                  </div>
                </div>
+
+               <Toggle easyMode={easyMode} setEasyMode={setEasyMode} />
             </header>
 
             <main>

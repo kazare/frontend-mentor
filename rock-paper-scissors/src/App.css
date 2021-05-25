@@ -17,14 +17,25 @@ body {
 }
 
 header {
+  margin: 50px auto;
+  width: 500px;
+}
+
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border: 3px solid var(--header-outline);
   border-radius: 10px;
   padding: 20px;
-  margin: 50px auto;
-  width: 500px;
+}
+
+.advanced-container header {
+  margin-bottom: 0px;
+}
+
+.toggle {
+  margin: auto;
 }
 
 .score-container {
@@ -154,4 +165,63 @@ header {
 .rules-button:hover {
   background-color: #ffffff;
   color: var(--dark-text);
+}
+
+@media screen and (max-width: 426px) {
+  header {
+    width: initial;
+    margin: 0 auto 20px;
+    padding: 20px 20px 0;
+  }
+
+  .advanced-container header {
+    margin-bottom: 20px;
+  }
+
+  .logo {
+    width: 100px;
+  }
+
+  .score-container {
+    padding: 10px;
+  }
+
+  .score {
+    font-size: 30px;
+  }
+
+  .rules-button {
+    position: static;
+    max-width: 50px;
+    margin: auto;
+    text-align: center;
+  }
+
+  .overlay {
+    background-color: #fff;
+  }
+
+  .rules {
+    padding: 0;
+    position: initial;
+  }
+
+  .rules-header {
+    display: block;
+    text-align: center;
+  }
+
+  .rules-img {
+    width: 80%;
+    margin: auto;
+    display: block;
+  }
+
+  .close-icon {
+    position: absolute;
+    bottom: 50px;
+    left: 0%;
+    right: 0;
+    margin: auto;
+  }
 }
